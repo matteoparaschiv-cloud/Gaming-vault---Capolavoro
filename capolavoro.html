@@ -3,120 +3,103 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Documentazione Tecnica | Gaming Vault</title>
+    <title>Documentazione Capolavoro | Gaming Vault</title>
     <style>
         :root {
-            --primary: #00d1ff;
-            --bg: #0f0f0f;
-            --card: #1a1a1a;
-            --text: #ffffff;
-            --accent: #22c55e;
+            --primary: #00e5ff;
+            --bg: #0b0d11;
+            --card: #13161c;
+            --text: #e8eaf0;
+            --code-bg: #000000;
         }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; margin: 0; padding: 20px; }
-        .container { max-width: 1000px; margin: auto; }
-        header { text-align: center; padding: 40px 0; border-bottom: 1px solid #333; }
-        h1 { color: var(--primary); font-size: 2.5rem; margin-bottom: 10px; }
-        h2 { color: var(--primary); margin-top: 40px; border-left: 4px solid var(--primary); padding-left: 15px; }
-        .card { background: var(--card); padding: 25px; border-radius: 12px; margin-top: 20px; border: 1px solid #333; }
-        code { background: #000; color: #00ff00; padding: 3px 6px; border-radius: 4px; font-family: 'Consolas', monospace; }
-        pre { background: #000; padding: 20px; border-radius: 10px; overflow-x: auto; border: 1px solid #444; color: #f8f8f2; font-family: 'Consolas', monospace; font-size: 0.9rem; }
-        .footer { text-align: center; margin-top: 50px; color: #666; font-size: 0.9rem; }
-        .back-link { display: inline-block; margin-bottom: 20px; color: var(--primary); text-decoration: none; font-weight: bold; }
-        .back-link:hover { text-decoration: underline; }
-        ul { padding-left: 20px; }
-        li { margin-bottom: 8px; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; margin: 0; padding: 20px; }
+        .container { max-width: 950px; margin: auto; }
+        header { text-align: center; padding: 30px 0; }
+        h1 { color: var(--primary); font-family: 'Rajdhani', sans-serif; font-size: 2.2rem; margin-bottom: 5px; }
+        h2 { color: var(--primary); border-left: 4px solid var(--primary); padding-left: 15px; margin-top: 40px; font-family: 'Rajdhani', sans-serif; }
+        .card { background: var(--card); padding: 25px; border-radius: 12px; margin-top: 15px; border: 1px solid rgba(255,255,255,0.05); }
+        
+        /* Stile Codice */
+        pre { 
+            background: var(--code-bg); 
+            padding: 15px; 
+            border-radius: 8px; 
+            border: 1px solid #333; 
+            overflow-x: auto; 
+            margin: 15px 0;
+        }
+        code { font-family: 'Consolas', monospace; color: #adbac7; font-size: 0.9rem; }
+        .keyword { color: #ff7b72; } /* Rosso per i tag PHP/JS */
+        .comment { color: #8b949e; font-style: italic; } /* Grigio per commenti */
+        .string { color: #a5d6ff; } /* Blu per le stringhe */
+
+        .repo-box { 
+            background: linear-gradient(135deg, rgba(0,229,255,0.1), rgba(123,94,167,0.1));
+            border: 1px solid var(--primary);
+            padding: 25px; text-align: center; border-radius: 15px; margin: 30px 0;
+        }
+        .btn-github {
+            display: inline-block; background: var(--primary); color: #000;
+            padding: 12px 25px; border-radius: 30px; text-decoration: none;
+            font-weight: bold; margin-top: 15px; transition: 0.3s;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <a href="index_gaming.php" class="back-link">← Torna all'App</a>
-        
         <header>
-            <h1>Relazione Tecnica: Gaming Vault</h1>
-            <p>Realizzazione del Progetto d'Esame "Capolavoro" - Matteo Paraschiv</p>
+            <h1>Gaming Vault: Documentazione Tecnica</h1>
+            <p>Sviluppo di un'applicazione Full-Stack per la gestione di librerie digitali</p>
         </header>
 
-        <section class="card">
-            <h2>1. Obiettivo del Progetto</h2>
-            <p>Il progetto <strong>Gaming Vault</strong> è un'applicazione web Full-Stack progettata per la gestione di una libreria videoludica personale. L'obiettivo è dimostrare la capacità di integrare diverse tecnologie informatiche (Database, Backend e API esterne) in un'unica interfaccia coerente e reattiva.</p>
-        </section>
-
-        <section class="card">
-            <h2>2. Struttura del Progetto</h2>
-            <p>L'applicazione è organizzata in modo modulare separando la logica di connessione, il backend e le risorse frontend:</p>
-            <pre>gaming-vault/
-├── db.php             # Connessione al database tramite PDO
-├── index_gaming.php   # Pagina principale (Interfaccia, Form e Logica PHP)
-├── relazione.html     # Questa documentazione tecnica
-└── README.md          # Introduzione al repository GitHub</pre>
-        </section>
-
-        <section class="card">
-            <h2>3. Architettura Dati (MySQL & PDO)</h2>
-            <p>La persistenza dei dati è affidata a un database relazionale MySQL. La connessione avviene tramite il file <code>db.php</code> utilizzando l'estensione <strong>PDO</strong>.</p>
-            <p><strong>Schema Relazionale (DDL):</strong></p>
-            <pre><code>CREATE TABLE generi (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    nome VARCHAR(50) NOT NULL
-);
-
-CREATE TABLE giochi (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    titolo VARCHAR(100) NOT NULL,
-    id_genere INT,
-    FOREIGN KEY (id_genere) REFERENCES generi(id)
-);</code></pre>
-            <p><strong>Punti chiave:</strong></p>
-            <ul>
-                <li><strong>Sicurezza:</strong> Uso di <code>PDO::ERRMODE_EXCEPTION</code> per la gestione robusta degli errori e il debugging.</li>
-                <li><strong>Integrità:</strong> Implementazione di una <code>LEFT JOIN</code> SQL in fase di lettura per relazionare la tabella dei giochi con quella dei generi, garantendo la visualizzazione dei nomi testuali invece dei semplici ID numerici.</li>
-            </ul>
-        </section>
-
-        <section class="card">
-            <h2>4. Logica Server-Side (PHP)</h2>
-            <p>Il file <code>index_gaming.php</code> gestisce le richieste HTTP tramite il metodo <code>POST</code> per l'inserimento sicuro dei dati nel database.</p>
-            <pre><code>// Esempio di Prepared Statement contro SQL Injection
-$sql = "INSERT INTO giochi (titolo, id_genere) VALUES (:titolo, :genere)";
-$stmt = $pdo->prepare($sql);
-$stmt->execute(['titolo' => $titolo, 'genere' => $genere]);</code></pre>
-            <p>Questa sezione è fondamentale per la sicurezza informatica: i <strong>Prepared Statements</strong> sanitizzano l'input dell'utente, rendendo l'applicazione del tutto immune agli attacchi di tipo SQL Injection.</p>
-        </section>
-
-        <section class="card">
-            <h2>5. Arricchimento Dati via API (JavaScript Asincrono)</h2>
-            <p>Una delle caratteristiche avanzate del progetto è l'integrazione asincrona in tempo reale con l'API REST pubblica di <strong>CheapShark</strong>.</p>
-            <pre><code>// Esempio di chiamata asincrona con Fetch API
-fetch(`https://www.cheapshark.com/api/1.0/games?title=${encodeURIComponent(titolo)}`)
-    .then(response => response.json())
-    .then(data => {
-        if(data.length > 0) {
-            document.getElementById(`img-${id}`).src = data[0].thumb;
-        } else {
-            document.getElementById(`img-${id}`).src = 'placeholder.png';
-        }
-    });</code></pre>
-            <ul>
-                <li><strong>Fetch API:</strong> JavaScript interroga un server esterno per recuperare l'URL della copertina del gioco in tempo reale basandosi sul titolo inserito.</li>
-                <li><strong>Manipolazione DOM:</strong> Le immagini vengono iniettate dinamicamente nella tabella senza ricaricare la pagina (approccio AJAX / SPA).</li>
-                <li><strong>UX:</strong> È stato implementato un sistema di "fallback" che mostra un'immagine segnaposto di default se l'API non restituisce risultati.</li>
-            </ul>
-        </section>
-
-        <section class="card">
-            <h2>6. Frontend & UX (CSS3 Moderno)</h2>
-            <p>L'interfaccia segue una declinazione scura del <strong>Material Design</strong> in versione Gaming/Cyberpunk:</p>
-            <ul>
-                <li>Uso di <code>object-fit: cover</code> per mantenere le proporzioni corrette delle copertine dei giochi nella tabella, evitando distorsioni.</li>
-                <li>Transizioni fluide ed effetti <code>:hover</code> per rendere i pulsanti e le card interattivi e responsivi al passaggio del mouse.</li>
-                <li>Layout responsive basato su elementi flessibili per garantire la massima leggibilità sia su desktop che su dispositivi mobile.</li>
-            </ul>
-        </section>
-
-        <div class="footer">
-            <p>© 2026 Matteo Paraschiv - Progetto Capolavoro Informatica</p>
-            <p>Visualizza il progetto : <a href="https://github.com/matteoparaschiv-cloud/Gaming-vault---Capolavoro" target="_blank" style="color: var(--primary); text-decoration: none;"> sulla repository di Github</a></p>
+        <div class="repo-box">
+            <h3>📦 Repository Ufficiale</h3>
+            <p>Il codice sorgente è disponibile e versionato su GitHub per la valutazione dell'integrità del software.</p>
+            <a href="https://github.com/matteoparaschiv-cloud/Gaming-vault---Capolavoro" target="_blank" class="btn-github">
+                Apri Repository su GitHub
+            </a>
         </div>
+
+        <section class="card">
+            <h2>1. Architettura Dati e Sicurezza (PHP/PDO)</h2>
+            <p>Per la gestione dei dati ho utilizzato <strong>PDO</strong>, che permette di separare la logica SQL dai dati dell'utente tramite i <em>Prepared Statements</em>, rendendo il sito immune alla SQL Injection.</p>
+            <pre><code><span class="comment">// Esempio di inserimento sicuro con Prepared Statement</span>
+<span class="keyword">$sql</span> = <span class="string">"INSERT INTO giochi (titolo, id_genere) VALUES (:t, :g)"</span>;
+<span class="keyword">$stmt</span> = <span class="keyword">$pdo</span>->prepare(<span class="keyword">$sql</span>);
+<span class="keyword">$stmt</span>->execute([<span class="string">'t'</span> => <span class="keyword">$titolo</span>, <span class="string">'g'</span> => <span class="keyword">$genere</span>]);</code></pre>
+        </section>
+
+        <section class="card">
+            <h2>2. Integrazione API: CheapShark (Cover)</h2>
+            <p>All'apertura della pagina, JavaScript interroga CheapShark per recuperare le immagini. Questo avviene in modo asincrono (senza bloccare il caricamento del sito).</p>
+            <pre><code><span class="comment">// Recupero dinamico della cover tramite titolo</span>
+fetch(<span class="string">`https://www.cheapshark.com/api/1.0/games?title=...`</span>)
+    .then(r => r.json())
+    .then(data => {
+        <span class="keyword">if</span>(data[0]) cell.innerHTML = <span class="string">`&lt;img src="${data[0].thumb}"&gt;`</span>;
+    });</code></pre>
+        </section>
+
+        <section class="card">
+            <h2>3. Dettagli Avanzati: RAWG API</h2>
+            <p>Cliccando sul titolo, viene attivata una seconda API (RAWG) per mostrare i dettagli approfonditi in una finestra modale. Ho implementato una logica per limitare la descrizione ed evitare testi eccessivamente lunghi.</p>
+            <pre><code><span class="comment">// Pulizia e formattazione della descrizione</span>
+<span class="keyword">let</span> desc = details.description;
+<span class="keyword">if</span> (desc.length > 600) {
+    desc = desc.substring(0, 600) + <span class="string">"..."</span>; <span class="comment">// Taglio a 600 caratteri</span>
+}
+document.getElementById(<span class="string">'modalDesc'</span>).innerHTML = desc;</code></pre>
+        </section>
+
+        <section class="card">
+            <h2>4. UI/UX e Design Responsive</h2>
+            <p>L'estetica è curata tramite CSS moderno. Ho utilizzato la proprietà <code>object-fit: cover</code> per garantire che le immagini di diversa provenienza si adattino perfettamente alla tabella senza deformarsi.</p>
+        </section>
+
+        <footer style="text-align: center; margin-top: 50px; padding-bottom: 20px; color: #6b7280; font-size: 0.9rem;">
+            Progetto realizzato da <strong>Matteo Paraschiv</strong> <br>
+            Esame di Stato 2025/2026 - Indirizzo Informatica
+        </footer>
     </div>
 </body>
 </html>

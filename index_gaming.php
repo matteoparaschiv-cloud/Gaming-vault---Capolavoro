@@ -193,7 +193,7 @@
         <div class="logo-icon">🎮</div>
         <h1>GAMING<span>VAULT</span></h1>
     </div>
-    <a href="relazione.html" class="btn-capolavoro">🚀 Esplora il Capolavoro</a>
+    <a href="capolavoro.html" class="btn-capolavoro">🚀 Esplora il Capolavoro</a>
 </header>
 
 <main>
